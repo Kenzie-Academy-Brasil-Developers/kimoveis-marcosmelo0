@@ -6,7 +6,6 @@ export const shedulesSchema = z.object({
     date: z.string(),
     hour: z.string(),
     realEstateId: z.number().int(),
-    userId: z.number().int()
 })
 
 export const returnSchedulesSchema = shedulesSchema.extend({

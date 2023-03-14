@@ -3,6 +3,7 @@ import { scheduler } from 'timers/promises';
 import { DataSource, DeepPartial } from 'typeorm';
 import app from '../../../app';
 import { AppDataSource } from '../../../data-source';
+import { Schedule } from '../../../entities';
 import { RealEstate } from '../../../entities/realEstate.entities';
 import { User } from '../../../entities/users.entities';
 import {

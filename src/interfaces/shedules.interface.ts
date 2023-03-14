@@ -3,3 +3,7 @@ import { returnSchedulesSchema, shedulesSchema } from "../schemas/shedules.schem
 
 export type IShedule = z.infer<typeof shedulesSchema>
 export type IReturnShedule = z.infer<typeof returnSchedulesSchema>
+
+export interface IScheduleMessage {
+    message: string
+}

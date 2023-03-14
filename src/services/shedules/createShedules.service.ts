@@ -1,31 +1,38 @@
-/* import { Repository } from "typeorm"
+import { Repository } from "typeorm"
 import { AppDataSource } from "../../data-source"
+import { User } from "../../entities"
 import { RealEstate } from "../../entities/realEstate.entities"
-import { Shedule } from "../../entities/shedules.entities"
+import { Schedule } from "../../entities/shedules.entities"
 import { AppError } from "../../errors/app.Error"
-import { IReturnShedule, IShedule } from "../../interfaces/shedules.interface"
-import { returnSchedulesSchema } from "../../schemas/shedules.schema"
+import { IReturnShedule, IScheduleMessage, IShedule } from "../../interfaces/shedules.interface"
 
-export const createShedulesService = async(shedulesData: IShedule): Promise<IReturnShedule> => {
+export const createShedulesService = async(shedulesData: IShedule, userId: number): Promise<IScheduleMessage> => {
 
+    const userRepository: Repository<User> = AppDataSource.getRepository(User)
     const realEstateRepository: Repository<RealEstate> = AppDataSource.getRepository(RealEstate)
-    
-    const verifyShedules = realEstateRepository.createQueryBuilder("shedules").
-    innerJoinAndSelect("real_estate.shedules", "real_estate_shedules").
-    innerJoinAndSelect("real_estate.shedules", "real_estate_shedulees").
-    where("real_estate_shedules.hour = :hour", {hour: shedulesData.hour}).
-    andWhere("real_estate_shedules.date = :date", {date: shedulesData.date}).
-    getOne()
+    const scheduleRepository: Repository<Schedule> = AppDataSource.getRepository(Schedule)
 
-    if(verifyShedules) {
-        throw new AppError("Não tem schedules ", 400)
+    const findUser = await userRepository.findOneBy({
+        id: userId
+    })
+    
+    const findRealEstate = await realEstateRepository.findOneBy({
+        id: shedulesData.realEstateId
+    }) 
+    
+    if(!findRealEstate) {
+        throw new AppError("RealEstate not found", 404)
     }
 
-    const shedule: Shedule = realEstateRepository.create(shedulesData)
-
-    await realEstateRepository.save(shedule)
-
-    const newShedule: IReturnShedule = returnSchedulesSchema.parse(shedule)
-
-    return newShedule
-} */
+    const shedule: Schedule = scheduleRepository.create({
+        ...shedulesData,
+        user: findUser!,
+        realEstate: findRealEstate
+    })
+    
+    await scheduleRepository.save(shedule)
+    
+    return {
+        message: "Schedule created"
+    }
+}

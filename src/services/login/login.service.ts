@@ -17,7 +17,6 @@ export const LoginService = async(loginData: ILogin): Promise<string | undefined
 
     const passwordMatch = await compare(loginData.password, String(user?.password))
     
-   
     
     if(user && passwordMatch) {
         const token: string = jwt.sign(
