@@ -4,7 +4,7 @@ import { returnCategoriesSchema } from "./categories.schema";
 
 export const realEstateSchema = z.object({
     value: z.string().or(z.number()),
-    size: z.number().int(),
+    size: z.number().int().positive(),
     address: z.object({
         street: z.string(),
         zipCode: z.string().max(8),

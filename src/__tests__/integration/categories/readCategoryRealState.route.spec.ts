@@ -2,7 +2,7 @@ import supertest from 'supertest';
 import { DataSource } from 'typeorm';
 import app from '../../../app';
 import { AppDataSource } from '../../../data-source';
-import { RealEstate } from '../../../entities/realEstate.entities';
+import { RealEstate } from '../../../entities/';
 import { errorsMock, readCategoryRealStateRouteMock } from '../../mocks';
 
 describe('GET /categories/:id/realEstate', () => {
@@ -38,6 +38,8 @@ describe('GET /categories/:id/realEstate', () => {
       status: 200,
       bodyEqual: expect.objectContaining(categoryRealEstate),
     };
+
+    
 
     expect(response.status).toBe(expectResults.status);
     expect(response.body).toEqual(expectResults.bodyEqual);

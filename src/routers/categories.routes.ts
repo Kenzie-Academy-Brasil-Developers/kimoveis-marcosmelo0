@@ -10,4 +10,4 @@ export const categoriesRoutes = Router()
 
 categoriesRoutes.post("", ensureTokenValid, ensureIsAdmin, ensureDataValid(categoriesSchema), ensureCategoryNameValid, createCategoriesController)
 categoriesRoutes.get("", listCategoriesController)
-categoriesRoutes.get("/:id/realestate", listCategoriesWithEstateController)
+categoriesRoutes.get("/:id/realEstate", listCategoriesWithEstateController)

@@ -15,14 +15,6 @@ export const ensureCategoryNameValid = async(req: Request, resp: Response, next:
     if(findCategory) {
         throw new AppError("Category already exists", 409)
     }
-    
-    const findCategoryID = await categoriesRepository.findOneBy({
-        id: Number(req.params.id)
-    })
-    
-    if(findCategoryID) {
-        throw new AppError("Category not found", 404)
-    }
 
     return next()
 }

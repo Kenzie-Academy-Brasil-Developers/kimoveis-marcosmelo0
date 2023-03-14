@@ -36,5 +36,12 @@ export class User {
   @DeleteDateColumn({ type: "date", nullable: true })
   deletedAt: string | Date | undefined | null;
 
-
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword(){
+    const isEncripted = getRounds(this.password)
+    if(!isEncripted) {
+      this.password = hashSync(this.password, 10)
+    }
+  }
 }
