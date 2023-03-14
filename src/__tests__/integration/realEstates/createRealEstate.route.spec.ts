@@ -2,7 +2,10 @@ import supertest from 'supertest';
 import { DataSource } from 'typeorm';
 import app from '../../../app';
 import { AppDataSource } from '../../../data-source';
-import { Address, Category, RealEstate } from '../../../entities';
+import { Address } from '../../../entities/address.entities';
+import { Category } from '../../../entities/categories.entities';
+import { RealEstate } from '../../../entities/realEstate.entities';
+
 import { createRealEstateRouteMock, errorsMock, tokenMock } from '../../mocks';
 
 describe('POST /realEstate', () => {

@@ -2,7 +2,7 @@ import supertest from 'supertest';
 import { DataSource } from 'typeorm';
 import app from '../../../app';
 import { AppDataSource } from '../../../data-source';
-import { RealEstate } from '../../../entities';
+import { RealEstate } from '../../../entities/realEstate.entities';
 import { errorsMock, readCategoryRealStateRouteMock } from '../../mocks';
 
 describe('GET /categories/:id/realEstate', () => {

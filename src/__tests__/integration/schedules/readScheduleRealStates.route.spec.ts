@@ -1,8 +1,8 @@
 import supertest from 'supertest';
 import { DataSource, DeepPartial } from 'typeorm';
-import app from '../../../app';
+import {app} from '../../../app';
 import { AppDataSource } from '../../../data-source';
-import { RealEstate } from '../../../entities';
+import { RealEstate } from '../../../entities/realEstate.entities';
 import { errorsMock, readScheduleRouteMock, tokenMock } from '../../mocks';
 
 describe('GET /schedules/realEstate/:id', () => {

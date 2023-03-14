@@ -1,6 +1,7 @@
 import { DeepPartial, Repository } from 'typeorm';
 import { AppDataSource } from '../../../data-source';
-import { Address, RealEstate } from '../../../entities';
+import { Address } from '../../../entities/address.entities';
+import { RealEstate } from '../../../entities/realEstate.entities';
 
 type iRealEstateRepo = Repository<RealEstate>;
 type iAddressRepo = Repository<Address>;

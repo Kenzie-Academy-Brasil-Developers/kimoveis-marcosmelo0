@@ -1,8 +1,10 @@
 import supertest from 'supertest';
+import { scheduler } from 'timers/promises';
 import { DataSource, DeepPartial } from 'typeorm';
-import app from '../../../app';
+import {app} from '../../../app';
 import { AppDataSource } from '../../../data-source';
-import { RealEstate, Schedule, User } from '../../../entities';
+import { RealEstate } from '../../../entities/realEstate.entities';
+import { User } from '../../../entities/users.entities';
 import {
   createScheduleRouteMock,
   createUserRouteMock,
@@ -10,6 +12,7 @@ import {
   readRealEstateRouteMock,
   tokenMock,
 } from '../../mocks';
+
 
 describe('POST /schedules', () => {
   let connection: DataSource;

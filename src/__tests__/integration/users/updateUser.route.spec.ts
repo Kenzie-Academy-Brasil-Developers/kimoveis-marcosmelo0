@@ -2,7 +2,7 @@ import supertest from 'supertest';
 import { DataSource } from 'typeorm';
 import app from '../../../app';
 import { AppDataSource } from '../../../data-source';
-import { User } from '../../../entities';
+import  { User }  from '../../../entities/';
 import { errorsMock, tokenMock, updateUserRouteMock } from '../../mocks';
 
 describe('PATCH /users', () => {
@@ -250,6 +250,7 @@ describe('PATCH /users', () => {
         `Bearer ${tokenMock.genToken(userNotAdmin.admin, userNotAdmin.id)}`
       )
       .send(updateUserRouteMock.userComplete);
+
 
     expect(response.status).toBe(errorsMock.notFound.user.status);
     expect(response.body).toStrictEqual(errorsMock.notFound.user.error);
